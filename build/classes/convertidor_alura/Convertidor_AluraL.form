@@ -31,7 +31,7 @@
           <Color blue="ff" green="ff" red="f0" type="rgb"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
       <Constraints>
@@ -113,11 +113,13 @@
               <Font name="Roboto Flex" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Dolares (USD)"/>
+                <StringItem index="1" value="Euros (EUR)"/>
+                <StringItem index="2" value="Libras esterlinas (GBP)"/>
+                <StringItem index="3" value="Pesos (MXN)"/>
+                <StringItem index="4" value="Yenes (JPY)"/>
+                <StringItem index="5" value="Wones (KRW)"/>
               </StringArray>
             </Property>
           </Properties>
@@ -155,11 +157,13 @@
               <Font name="Roboto Flex" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Dolares (USD)"/>
+                <StringItem index="1" value="Euros (EUR)"/>
+                <StringItem index="2" value="Libras esterlinas (GBP)"/>
+                <StringItem index="3" value="Pesos (MXN)"/>
+                <StringItem index="4" value="Yenes (JPY)"/>
+                <StringItem index="5" value="Wones (KRW)"/>
               </StringArray>
             </Property>
           </Properties>
@@ -207,7 +211,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="salir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="f0" type="rgb"/>
@@ -218,6 +222,9 @@
                   <Color PropertyName="color" blue="80" green="0" red="0" type="rgb"/>
                 </LineBorder>
               </Border>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
             </Property>
           </Properties>
           <Constraints>
@@ -250,7 +257,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="consultar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="80" green="0" red="0" type="rgb"/>
