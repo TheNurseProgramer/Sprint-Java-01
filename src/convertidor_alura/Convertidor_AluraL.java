@@ -4,6 +4,8 @@
  */
 package convertidor_alura;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alexi
@@ -41,7 +43,7 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         ls_type2 = new javax.swing.JComboBox<>();
-        resultado = new javax.swing.JLabel();
+        tipo_moneda = new javax.swing.JLabel();
         ls_type1 = new javax.swing.JComboBox<>();
         in_money = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -49,6 +51,7 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         consultar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        resultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,11 +78,11 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         ls_type2.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
         jPanel1.add(ls_type2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 160, 30));
 
-        resultado.setBackground(new java.awt.Color(0, 0, 139));
-        resultado.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
-        resultado.setForeground(new java.awt.Color(0, 0, 139));
-        resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 270, 30));
+        tipo_moneda.setBackground(new java.awt.Color(0, 0, 139));
+        tipo_moneda.setFont(new java.awt.Font("Roboto Flex", 1, 18)); // NOI18N
+        tipo_moneda.setForeground(new java.awt.Color(0, 0, 139));
+        tipo_moneda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(tipo_moneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 220, 30));
 
         ls_type1.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
         jPanel1.add(ls_type1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 160, 30));
@@ -102,6 +105,11 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         salir.setBackground(new java.awt.Color(240, 255, 255));
         salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 128)));
         salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirMouseClicked(evt);
+            }
+        });
         salir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
@@ -136,6 +144,12 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
 
         jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 110, 40));
 
+        resultado.setBackground(new java.awt.Color(0, 0, 139));
+        resultado.setFont(new java.awt.Font("Roboto Flex", 1, 18)); // NOI18N
+        resultado.setForeground(new java.awt.Color(0, 0, 139));
+        resultado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 70, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
 
         pack();
@@ -153,28 +167,53 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         // TODO add your handling code here:
          try{
             double money = Double.parseDouble(in_money.getText());
-            if (this.selected_item(ls_type1.getSelectedItem().toString()).equals("Pesos")){
+             if (this.compare_strings()){
+                     JOptionPane.showMessageDialog(null, "La conversión no puede ser entre iguales");
+             }else{
+                 if (this.selected_item(ls_type1.getSelectedItem().toString()).equals("Pesos")){
                 for (int i = 0; i < monedas.length;i++){
                     if (monedas [i].getName().equals(this.selected_item(ls_type2.getSelectedItem().toString()))){
-                        resultado.setText(String.valueOf(monedas [i].convertReverse(Double.parseDouble(in_money.getText()))));
+                        tipo_moneda.setText(String.valueOf(monedas [i].convertReverse(Double.parseDouble(in_money.getText()))));
                     }
                 }
             }else if (this.selected_item(ls_type2.getSelectedItem().toString()).equals("Pesos")){
                 for (int i = 0; i < monedas.length;i++){
                     if (monedas [i].getName().equals(this.selected_item(ls_type1.getSelectedItem().toString()))){
-                        resultado.setText(String.valueOf(monedas [i].convertTomxn(Double.parseDouble(in_money.getText()))));
+                        tipo_moneda.setText(String.valueOf(monedas [i].convertTomxn(Double.parseDouble(in_money.getText()))));
+                    }
+                }
+            }else{
+               
+                for (int i = 0; i < monedas.length;i++){
+                    if (this.selected_item(ls_type1.getSelectedItem().toString()).equals(monedas [i].getName())){
+                        double aux = monedas [i].convertTomxn(Double.parseDouble(in_money.getText()));
+                        for (int j = 0; j < monedas.length;j++){
+                            if (this.selected_item(ls_type2.getSelectedItem().toString()).equals(monedas [j].getName())){
+                                tipo_moneda.setText(String.valueOf(monedas [j].convertReverse(aux)));
+                            }
+                        }
                     }
                 }
             }
+         String [] t_m = ls_type2.getSelectedItem().toString().split(" ");
+         resultado.setText(t_m[1]);
+         } 
         }catch(Exception e){
-            System.out.print("Fatal error");
-            
+            JOptionPane.showMessageDialog(null, "Coloque solo numeros");
         }
     }//GEN-LAST:event_consultarMouseClicked
+
+    private void salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_salirMouseClicked
     public String selected_item (String compare){
         String []aux = compare.split (" "); 
         return aux [0];
     }
+    public boolean compare_strings (){
+        return String.valueOf(ls_type1.getSelectedItem()).equals(String.valueOf(ls_type2.getSelectedItem()));
+    } 
     /**
      * @param args the command line arguments
      */
@@ -224,5 +263,6 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ls_type2;
     private javax.swing.JLabel resultado;
     private javax.swing.JPanel salir;
+    private javax.swing.JLabel tipo_moneda;
     // End of variables declaration//GEN-END:variables
 }
