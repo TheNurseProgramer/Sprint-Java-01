@@ -93,7 +93,7 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
                 in_moneyActionPerformed(evt);
             }
         });
-        jPanel1.add(in_money, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 160, 30));
+        jPanel1.add(in_money, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 350, 30));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 139));
         jLabel6.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
