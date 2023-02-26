@@ -9,17 +9,24 @@ package convertidor_alura;
  * @author alexi
  */
 public class Convertidor_AluraL extends javax.swing.JFrame {
-    Moneda dolar = new Moneda ("Dolar","USD",18.4);
-    Moneda yen = new Moneda ("Yen","JPY",0.13);
-    Moneda euro = new Moneda ("Euro","EUR",19.4);
-    Moneda libra = new Moneda ("Libra esterlina","GBP",21.97);
-    Moneda won = new Moneda ("Won surcoreano","KRW",0.014);
+    Moneda dolar = new Moneda ("Dolares","USD",18.4);
+    Moneda yen = new Moneda ("Yenes","JPY",0.13);
+    Moneda euro = new Moneda ("Euros","EUR",19.4);
+    Moneda libra = new Moneda ("Libra","GBP",21.97);
+    Moneda won = new Moneda ("Won","KRW",0.014);
+    Moneda peso = new Moneda ("Pesos","MXN",1);
+    Moneda monedas []= {dolar,yen,euro,libra,won,peso};   
     /**
      * Creates new form Convertidor_AluraL
      */
     public Convertidor_AluraL() {
         initComponents();
+        for (int i = 0 ;i<monedas.length; i++){
+            ls_type1.addItem(monedas [i].getName()+" ("+monedas [i].getAbb()+")");
+            ls_type2.addItem(monedas [i].getName()+" ("+monedas [i].getAbb()+")");
+        }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,9 +40,8 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        out_money = new javax.swing.JTextField();
         ls_type2 = new javax.swing.JComboBox<>();
-        tipo_moneda = new javax.swing.JLabel();
+        resultado = new javax.swing.JLabel();
         ls_type1 = new javax.swing.JComboBox<>();
         in_money = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -66,26 +72,16 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 30, 30));
 
-        out_money.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
-        out_money.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                out_moneyActionPerformed(evt);
-            }
-        });
-        jPanel1.add(out_money, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 160, 30));
-
         ls_type2.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
-        ls_type2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dolares (USD)", "Euros (EUR)", "Libras esterlinas (GBP)", "Pesos (MXN)", "Yenes (JPY)", "Wones (KRW)" }));
         jPanel1.add(ls_type2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 160, 30));
 
-        tipo_moneda.setBackground(new java.awt.Color(0, 0, 139));
-        tipo_moneda.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
-        tipo_moneda.setForeground(new java.awt.Color(0, 0, 139));
-        tipo_moneda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(tipo_moneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 80, 30));
+        resultado.setBackground(new java.awt.Color(0, 0, 139));
+        resultado.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
+        resultado.setForeground(new java.awt.Color(0, 0, 139));
+        resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 270, 30));
 
         ls_type1.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
-        ls_type1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dolares (USD)", "Euros (EUR)", "Libras esterlinas (GBP)", "Pesos (MXN)", "Yenes (JPY)", "Wones (KRW)" }));
         jPanel1.add(ls_type1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 160, 30));
 
         in_money.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
@@ -113,12 +109,17 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Salir");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        salir.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
+        salir.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 40, 20));
 
         jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 110, 40));
 
         consultar.setBackground(new java.awt.Color(0, 0, 128));
         consultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        consultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                consultarMouseClicked(evt);
+            }
+        });
         consultar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Roboto Flex", 0, 14)); // NOI18N
@@ -126,7 +127,12 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Consultar");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        consultar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 6, 100, 30));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        consultar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 20));
 
         jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 110, 40));
 
@@ -135,14 +141,40 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void out_moneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_out_moneyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_out_moneyActionPerformed
-
     private void in_moneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_moneyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_in_moneyActionPerformed
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void consultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarMouseClicked
+        // TODO add your handling code here:
+         try{
+            double money = Double.parseDouble(in_money.getText());
+            if (this.selected_item(ls_type1.getSelectedItem().toString()).equals("Pesos")){
+                for (int i = 0; i < monedas.length;i++){
+                    if (monedas [i].getName().equals(this.selected_item(ls_type2.getSelectedItem().toString()))){
+                        resultado.setText(String.valueOf(monedas [i].convertReverse(Double.parseDouble(in_money.getText()))));
+                    }
+                }
+            }else if (this.selected_item(ls_type2.getSelectedItem().toString()).equals("Pesos")){
+                for (int i = 0; i < monedas.length;i++){
+                    if (monedas [i].getName().equals(this.selected_item(ls_type1.getSelectedItem().toString()))){
+                        resultado.setText(String.valueOf(monedas [i].convertTomxn(Double.parseDouble(in_money.getText()))));
+                    }
+                }
+            }
+        }catch(Exception e){
+            System.out.print("Fatal error");
+            
+        }
+    }//GEN-LAST:event_consultarMouseClicked
+    public String selected_item (String compare){
+        String []aux = compare.split (" "); 
+        return aux [0];
+    }
     /**
      * @param args the command line arguments
      */
@@ -190,8 +222,7 @@ public class Convertidor_AluraL extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> ls_type1;
     private javax.swing.JComboBox<String> ls_type2;
-    private javax.swing.JTextField out_money;
+    private javax.swing.JLabel resultado;
     private javax.swing.JPanel salir;
-    private javax.swing.JLabel tipo_moneda;
     // End of variables declaration//GEN-END:variables
 }
